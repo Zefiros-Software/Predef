@@ -2,19 +2,23 @@ sudo: required
 language: generic
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      env: VERSION=6
-    - os: linux
-      dist: trusty
-      env: VERSION=7
-    - os: linux
-      dist: trusty
-      env: VERSION=5
-    - os: osx
-      osx_image: xcode8
-      language: generic
+  - os: linux
+    dist: trusty
+    env: VERSION=6
+  - os: linux
+    dist: trusty
+    env: VERSION=7
+  - os: osx
+    osx_image: xcode9.2
+    language: generic
+global:
+  env:
+  - PROJECT=Predef
+  - PROJECT_TEMPLATE=default
 install:
-  - source /dev/stdin <<< "$(curl -s https://raw.githubusercontent.com/Zefiros-Software/ZPM/features/refactor/script/install-zpm.sh)"
+- source /dev/stdin <<< "$(curl -s https://raw.githubusercontent.com/Zefiros-Software/ZPM/dev/script/install-zpm.sh)"
 script:
-  - 'cd test && zpm run test-definition Predef'
+- cd test && zpm run test-definition Predef
+notifications:
+  slack:
+    secure: oJckixl6Yt+rQicq7EpCWhdaHZ7bgW9NoyUAJA+SR53Uh+h2shmAqKDec/hv+s8LBK2GJBfG+KDuvoqA/Uq/Gok285rMrgu0tBfw9Qyye+rfU795VLbEbL0YT4XPcxs2aVrAQELFUStnG4KfkWO+bOUV4MnsbG5xyk7K0zMCit06D9Hw5V6PI6YxBop24LG9+Bnykw6GXcRUVOUn3rhaQoFvOYdurqvd//avhBs8UeGGXxLN6rsdu8GaKizkDg+OfUn+pj2XD2GDG7zvC2Kx2r3rDWLRbtSoH40W2a9z5FIOWxVVjyDrlGMzQ4WmxEjXbLfr8N1cdHX/iByDdCVZ/zmXZsEhXIAH8SHuiy+ugJ/GI8YEyJzzcy6JiPVi/DNK07vMlC3T5VFKQbzHJJLVyuUZNLaoU/uIZYK93VG9T9MmHKrpn3cQddkgxWWYm8IsCDjjyr0TznL9OKbkhHn7G8C+C4qmuvfsf4uNYWlKcKXzSks9DaMxeSYrfcPnX0BKpNuOY5WSVRQlukcT0CyoToVLRVVrZGU4Azo7RxN59onPNY3nukaxbMk63nqkSihYy50JbzloXf/nHYFCKVYbSC7zc+ELtLGFClrHrdGGd2OFpZybzxF6lc54QhJFRtY2E0XiyDR8gb/UKUUncEbxkVKUWTpSIhIHRSizyf28mG4=
